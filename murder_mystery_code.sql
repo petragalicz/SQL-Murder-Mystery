@@ -1,6 +1,6 @@
 --To begin with, reading the crime scene report:
 SELECT description FROM crime_scene_report 
-WHERE date="20180115" AND type="murder" AND city = "SQL City";
+WHERE date = 20180115 AND type="murder" AND city = "SQL City";
 
 -- report:
 --"Security footage shows that there were 2 witnesses. The first witness lives at the last house on "Northwestern Dr". 
@@ -26,13 +26,12 @@ WHERE person.address_street_name = "Franklin Ave" AND name LIKE "Annabel%";
 --transcript of the interview: 
 --"I saw the murder happen, and I recognized the killer from my gym when I was working out last week on January the 9th."
 
-
 -- Then, comparing the the list of suspects based on the interviews, we find the murderer:
 SELECT * FROM get_fit_now_member
 JOIN get_fit_now_check_in ON get_fit_now_member.id = get_fit_now_check_in.membership_id
 WHERE get_fit_now_member.id LIKE "48Z%" 
 AND get_fit_now_member.membership_status = "gold" 
-AND get_fit_now_check_in.check_in_date = "20180109" 
+AND get_fit_now_check_in.check_in_date = 20180109
 AND get_fit_now_member.person_id IN 
 (SELECT person.id FROM person 
 JOIN drivers_license ON person.license_id = drivers_license.id
@@ -62,7 +61,7 @@ AND person.id IN
 WHERE event_name = "SQL Symphony Concert"
 AND date > 20171130 AND date < 20180101
 GROUP BY person_id
-HAVING count(*)=3);
+HAVING count(*) = 3);
 
 --The villain is Miranda Priestly.
 
